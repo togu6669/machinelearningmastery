@@ -1,6 +1,9 @@
 import numpy
 from keras.models import Sequential
 from keras.layers import Dense
+from sklearn.model_selection import KFold
+from sklearn.model_selection import LeaveOneOut
+from sklearn.model_selection import cross_val_score
 
 # Function to create model, required for KerasClassifier
 def create_model():
@@ -16,3 +19,7 @@ model = KerasClassifier(build_fn=create_model, epochs=150, batch_size=10)
 # evaluate model using 10-fold cross validation in scikit-learn
 kfold = StratifiedKFold(n_splits=10, shuffle=True, random_state=seed)
 results = cross_val_score(model, X, Y, cv=kfold)
+
+# list all data in history
+history = model.fit(...)
+print(history.history.keys())
